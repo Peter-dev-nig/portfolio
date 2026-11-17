@@ -19,6 +19,7 @@
   --glow-a: rgba(79, 70, 229, 0.16);
   --glow-b: rgba(14, 165, 233, 0.14);
   --dot: #CDD2E8;
+  --cyan: #06B6D4;
   --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -35,6 +36,7 @@
   --glow-a: rgba(99, 102, 241, 0.30);
   --glow-b: rgba(34, 211, 238, 0.13);
   --dot: #262B52;
+  --cyan: #67E8F9;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,6 +53,7 @@
     --glow-a: rgba(99, 102, 241, 0.30);
     --glow-b: rgba(34, 211, 238, 0.13);
     --dot: #262B52;
+  --cyan: #67E8F9;
   }
 }
 
@@ -111,7 +114,11 @@ h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
   border-bottom: 1px solid var(--line);
 }
 .nav { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.logo { font-weight: 800; font-size: 1.15rem; letter-spacing: -0.03em; }
+.logo { display: inline-flex; align-items: center; color: var(--text); }
+.logo-svg { display: block; height: 26px; width: auto; flex: none; overflow: visible; }
+.logo-svg .lg-o { stroke: currentColor; }
+.logo-svg .lg-dev { stroke: var(--accent); }
+.logo-svg .lg-dot { fill: var(--cyan); }
 .logo span { color: var(--accent); }
 .nav-links { display: flex; gap: 4px; }
 .nav-links a {
