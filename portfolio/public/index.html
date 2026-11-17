@@ -4,202 +4,55 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Oluwaferanmi | Software Engineer and Mobile App Developer</title>
-  <meta name="description" content="Portfolio of Oluwaferanmi Osungbure, a Software Engineering student at Bowen University building useful mobile apps." />
-  <meta property="og:title" content="Oluwaferanmi | Software Engineering Student" />
+  <meta name="description" content="Portfolio of Oluwaferanmi Osungbure, a Software Engineering student at Bowen University building useful mobile and web apps." />
+  <meta property="og:title" content="Oluwaferanmi | Software Engineer and Mobile App Developer" />
   <meta property="og:description" content="Projects, skills and contact details." />
-  <meta property="og:image" content="images/preview.png" />
+  <meta property="og:image" content="https://oluwaferanmi-dev-portfolio.web.app/images/me.jpg" />
   <link rel="icon" href="images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Source+Serif+4:opsz,wght@8..60,400..600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script>
-    // Apply saved theme before paint to avoid a flash
     try {
       var t = localStorage.getItem("theme");
       if (t) document.documentElement.setAttribute("data-theme", t);
     } catch (e) {}
   </script>
 </head>
-<body>
+<body class="landing-page">
 
-  <header class="site-header">
-    <nav class="nav container">
-      <a href="#home" class="logo">Oluwaferanmi<span>.</span><span>Dev</span></span></a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">🌙</button>
-        <button id="menu-toggle" class="icon-btn menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
-      </div>
-    </nav>
-  </header>
+  <div class="landing-bar container">
+    <button id="theme-toggle" class="pill-btn" type="button">Dark</button>
+  </div>
 
-  <main>
-
-    <!-- HERO -->
-    <section id="home" class="hero container">
-      <p class="eyebrow">Hi, I'm Oluwaferanmi 👋</p>
-      <h1>I build clean, useful <span class="accent">mobile applications</span>.</h1>
+  <main id="main" class="landing container">
+    <div class="landing-copy">
+      <h1 class="landing-name">Oluwaferanmi</h1>
+      <p class="landing-role">Software Engineer and Mobile App Developer</p>
       <p class="lead">
-        Software Engineering student at Bowen University. I enjoy turning ideas into
-        working apps, from full fleged mobile applications to web apps to tools that make everyday tasks easier.
+        Software Engineering student at Bowen University, Nigeria.
+        I build clean, useful apps for mobile and the web.
       </p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">View projects</a>
-        <a href="#contact" class="btn btn-outline">Contact me</a>
+
+      <div class="hero-actions">
+        <a href="home.html" class="btn btn-primary">Enter portfolio</a>
+        <a href="projects.html" class="btn btn-secondary">View projects</a>
       </div>
-    </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section container">
-      <h2 class="section-title">Projects</h2>
-      <p class="section-sub">A few things I've built. Replace these with your own.</p>
-
-      <div class="grid">
-        <article class="card reveal">
-          <img src="images/clientflow.png" alt="Screenshot of ClientFlow CRM dashboard" loading="lazy" />
-          <div class="card-body">
-            <h3>ClientFlow</h3>
-            <p>A frontend CRM web app for managing clients, deals and follow-ups in one clean dashboard.</p>
-            <ul class="tags">
-              <li>HTML</li><li>CSS</li><li>JavaScript</li>
-            </ul>
-            <div class="card-links">
-              <a href="#" target="_blank" rel="noopener">Live demo</a>
-              <a href="#" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal">
-          <img src="images/project-2.png" alt="Screenshot of project two" loading="lazy" />
-          <div class="card-body">
-            <h3>Project Two</h3>
-            <p>One or two sentences: what problem it solves, and what you did.</p>
-            <ul class="tags">
-              <li>Tech</li><li>Tech</li>
-            </ul>
-            <div class="card-links">
-              <a href="#" target="_blank" rel="noopener">Live demo</a>
-              <a href="#" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal">
-          <img src="images/project-3.png" alt="Screenshot of project three" loading="lazy" />
-          <div class="card-body">
-            <h3>Project Three</h3>
-            <p>One or two sentences: what problem it solves, and what you did.</p>
-            <ul class="tags">
-              <li>Tech</li><li>Tech</li>
-            </ul>
-            <div class="card-links">
-              <a href="#" target="_blank" rel="noopener">Live demo</a>
-              <a href="#" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="section container about">
-      <img class="avatar" src="images/me.jpg" alt="Portrait of Peter" />
-      <div>
-        <h2 class="section-title">About me</h2>
-        <p>
-          I'm a 200-level Software Engineering student at Bowen University, Nigeria.
-          I like solving problems step by step, and I'm always building something,
-          whether it's a web app, a side project or a new skill.
-        </p>
-        <p>
-          Write a few lines here about what drives you, what you're learning right now,
-          and what kind of opportunities you're looking for (internships, collaborations, freelance).
-        </p>
-        <a href="resume.pdf" class="btn btn-outline" download>Download résumé</a>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="section container">
-      <h2 class="section-title">Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-group reveal">
-          <h3>Languages</h3>
-          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-        </div>
-        <div class="skill-group reveal">
-          <h3>Tools</h3>
-          <ul class="tags"><li>Git</li><li>GitHub</li><li>VS Code</li><li>Firebase</li></ul>
-        </div>
-        <div class="skill-group reveal">
-          <h3>Learning</h3>
-          <ul class="tags"><li>Add what you're learning</li></ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education" class="section container">
-      <h2 class="section-title">Education &amp; experience</h2>
-      <ul class="timeline">
-        <li class="reveal">
-          <span class="time">2025 – Present</span>
-          <h3>B.Sc. Software Engineering, Bowen University</h3>
-          <p>Currently in 200 level.</p>
-        </li>
-        <li class="reveal">
-          <span class="time">Year</span>
-          <h3>Certification, internship or community</h3>
-          <p>Add anything relevant: bootcamps, hackathons, student groups.</p>
-        </li>
+      <ul class="social-row">
+        <li><a class="icon-link" href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg><span>GitHub</span></a></li>
+        <li><a class="icon-link" href="https://linkedin.com/in/feranmi-osungbure-7528b6446" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg><span>LinkedIn</span></a></li>
+        <li><a class="icon-link" href="https://instagram.com/oluwaferanmi_dev" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg><span>Instagram</span></a></li>
+        <li><a class="icon-link" href="mailto:oluwaferanmipeterdev@gmail.com"><svg class="icon" aria-hidden="true"><use href="#icon-mail"/></svg><span>Email</span></a></li>
       </ul>
-    </section>
+    </div>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section container contact">
-      <h2 class="section-title">Let's work together</h2>
-      <p class="section-sub">Have a project, an internship or just want to say hi? Send me a message.</p>
-
-      <div class="contact-wrap">
-        <form id="contact-form" class="form" action="https://formspree.io/f/mljbjqqv" method="POST">
-          <input type="hidden" name="_subject" value="New message from my portfolio" />
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-
-          <label>Name
-            <input type="text" name="name" required />
-          </label>
-          <label>Email
-            <input type="email" name="email" required />
-          </label>
-          <label>Message
-            <textarea name="message" rows="5" required></textarea>
-          </label>
-          <button type="submit" class="btn btn-primary">Send message</button>
-          <p id="form-status" role="status" aria-live="polite"></p>
-        </form>
-
-        <ul class="contact-links">
-          <li><a href="mailto:oluwaferanmipeterdev@gmail.com">oluwaferanmipeterdev@gmail.com</a></li>
-          <li><a href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://linkedin.com/in/feranmi-osungbure-7528b6446?" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://instagram.com/oluwaferanmi_dev" target="_blank" rel="noopener">Instagram</a></li>
-        </ul>
-      </div>
-    </section>
-
+    <img class="landing-portrait" src="images/me.jpg" width="1254" height="1254"
+         alt="Portrait of Oluwaferanmi, wearing glasses and a navy suit" />
   </main>
 
-  <footer class="footer">
-    <p>© <span id="year"></span> Oluwaferanmi Peter. All rights reserved.</p>
-  </footer>
+  <p class="landing-foot container">&copy; <span id="year"></span> Oluwaferanmi Peter. All rights reserved.</p>
 
   <script src="js/main.js"></script>
 </body>

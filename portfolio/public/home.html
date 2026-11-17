@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Oluwaferanmi</title>
+  <meta name="description" content="Portfolio of Oluwaferanmi Osungbure, a Software Engineering student at Bowen University building useful mobile and web apps." />
+  <meta property="og:title" content="Home | Oluwaferanmi" />
+  <meta property="og:description" content="Projects, skills and contact details." />
+  <meta property="og:image" content="https://oluwaferanmi-dev-portfolio.web.app/images/me.jpg" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Source+Serif+4:opsz,wght@8..60,400..600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    // Apply saved theme before paint to avoid a flash
+    try {
+      var t = localStorage.getItem("theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a href="home.html" class="logo">Oluwaferanmi.Dev</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="home.html" aria-current="page">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="pill-btn" type="button">Dark</button>
+        <button id="menu-toggle" class="pill-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="hero container">
+      <div class="hero-copy">
+        <h1>I build clean, useful mobile applications.</h1>
+        <p class="lead">
+          I'm Oluwaferanmi, a Software Engineering student at Bowen University in Nigeria.
+          I turn ideas into working apps, from full-fledged mobile applications to web apps
+          and tools that make everyday tasks easier.
+        </p>
+        <div class="hero-actions">
+          <a href="projects.html" class="btn btn-primary">View projects</a>
+          <a href="contact.html" class="btn btn-secondary">Contact me</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel" aria-label="Current status">
+        <dl>
+          <div>
+            <dt>Building</dt>
+            <dd>ClientFlow, a CRM platform for managing customers, orders and campaigns</dd>
+          </div>
+          <div>
+            <dt>Studying</dt>
+            <dd>Software Engineering, 200 level, Bowen University</dd>
+          </div>
+          <div>
+            <dt>Open to</dt>
+            <dd><span class="status-dot" aria-hidden="true"></span>Internships, freelance projects and collaborations</dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="block container">
+      <div class="block-head">
+        <h2>Selected work</h2>
+        <a class="text-link" href="projects.html">View all projects</a>
+      </div>
+
+      <div class="feature">
+        <div class="feature-text">
+          <h3 class="feature-title">ClientFlow</h3>
+          <p>
+            A frontend CRM web app for managing customers, orders and campaigns, with a
+            revenue dashboard, activity log and light and dark themes.
+          </p>
+          <dl class="facts">
+            <div><dt>Role</dt><dd>Design and frontend development</dd></div>
+            <div><dt>Stack</dt><dd>React, TypeScript, Vite, Tailwind CSS, Recharts</dd></div>
+          </dl>
+          <div class="link-row">
+            <a class="text-link" href="projects.html#clientflow">View project</a>
+          </div>
+        </div>
+        <figure class="phone">
+          <img src="images/clientflow.png" width="720" height="1395"
+               alt="ClientFlow landing page on a phone, with the headline Manage Clients, Monitor Orders, Grow Faster" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="block container split">
+      <h2>About me</h2>
+      <div class="prose">
+        <p>
+          I'm a 200-level Software Engineering student at Bowen University, Nigeria.
+          I like solving problems step by step, and I'm always building something,
+          whether it's a web app, a side project or a new skill.
+        </p>
+        <a class="text-link" href="about.html">More about me</a>
+      </div>
+    </section>
+
+    <section class="closing container">
+      <h2>Let's work together</h2>
+      <p>Have a project, an internship or just want to say hi? Send me a message.</p>
+      <a href="contact.html" class="btn btn-primary">Contact me</a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Oluwaferanmi Peter. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a class="icon-link" href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg><span>GitHub</span></a></li>
+        <li><a class="icon-link" href="https://linkedin.com/in/feranmi-osungbure-7528b6446" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg><span>LinkedIn</span></a></li>
+        <li><a class="icon-link" href="https://instagram.com/oluwaferanmi_dev" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg><span>Instagram</span></a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

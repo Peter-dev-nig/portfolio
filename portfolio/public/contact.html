@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Oluwaferanmi</title>
+  <meta name="description" content="Contact Oluwaferanmi Osungbure about projects, internships and collaborations." />
+  <meta property="og:title" content="Contact | Oluwaferanmi" />
+  <meta property="og:description" content="Send a message about a project, internship or collaboration." />
+  <meta property="og:image" content="https://oluwaferanmi-dev-portfolio.web.app/images/me.jpg" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Source+Serif+4:opsz,wght@8..60,400..600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    try {
+      var t = localStorage.getItem("theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a href="home.html" class="logo">Oluwaferanmi.Dev</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="pill-btn" type="button">Dark</button>
+        <button id="menu-toggle" class="pill-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="page-head container">
+      <h1>Contact</h1>
+      <p class="lead">Have a project, an internship or just want to say hi? Send me a message.</p>
+    </section>
+
+    <section class="contact-grid container">
+      <form id="contact-form" class="form" action="https://formspree.io/f/mljbjqqv" method="POST">
+        <input type="hidden" name="_subject" value="New message from my portfolio" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <label>Name
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label>Email
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label>Message
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p id="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="contact-details">
+        <h2>Email</h2>
+        <a class="email-link icon-link" href="mailto:oluwaferanmipeterdev@gmail.com"><svg class="icon" aria-hidden="true"><use href="#icon-mail"/></svg><span>oluwaferanmipeterdev@gmail.com</span></a>
+        <h2>Elsewhere</h2>
+        <ul>
+          <li><a class="text-link icon-link" href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg><span>GitHub</span></a></li>
+          <li><a class="text-link icon-link" href="https://linkedin.com/in/feranmi-osungbure-7528b6446" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg><span>LinkedIn</span></a></li>
+          <li><a class="text-link icon-link" href="https://instagram.com/oluwaferanmi_dev" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg><span>Instagram</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Oluwaferanmi Peter. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a class="icon-link" href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg><span>GitHub</span></a></li>
+        <li><a class="icon-link" href="https://linkedin.com/in/feranmi-osungbure-7528b6446" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg><span>LinkedIn</span></a></li>
+        <li><a class="icon-link" href="https://instagram.com/oluwaferanmi_dev" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg><span>Instagram</span></a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

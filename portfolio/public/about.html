@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Oluwaferanmi</title>
+  <meta name="description" content="About Oluwaferanmi Osungbure, a Software Engineering student at Bowen University: skills, education and what he is working on." />
+  <meta property="og:title" content="About | Oluwaferanmi" />
+  <meta property="og:description" content="Skills, education and what I'm working on." />
+  <meta property="og:image" content="https://oluwaferanmi-dev-portfolio.web.app/images/me.jpg" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Source+Serif+4:opsz,wght@8..60,400..600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    try {
+      var t = localStorage.getItem("theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a href="home.html" class="logo">Oluwaferanmi.Dev</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="pill-btn" type="button">Dark</button>
+        <button id="menu-toggle" class="pill-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="page-head container">
+      <h1>About me</h1>
+      <p class="lead">Software Engineering student at Bowen University, Nigeria.</p>
+    </section>
+
+    <section class="about-grid container">
+      <img class="portrait" src="images/me.jpg" width="1254" height="1254"
+           alt="Portrait of Oluwaferanmi, wearing glasses and a navy suit" />
+      <div class="prose">
+        <p>
+          I'm a 200-level Software Engineering student at Bowen University, Nigeria.
+          I like solving problems step by step, and I'm always building something,
+          whether it's a web app, a side project or a new skill.
+        </p>
+        <p>
+          Most of my work so far is frontend. ClientFlow, my CRM app, is where I've practised
+          React, TypeScript and state management the most, and I'm now putting more time into
+          mobile app development.
+        </p>
+        <p>
+          I'm looking for internships and freelance projects where I can keep building and
+          learn from a team.
+        </p>
+        <!-- To show a résumé button: put resume.pdf in the public folder, then remove these comment marks.
+        <a href="resume.pdf" class="btn btn-secondary" download>Download résumé</a>
+        -->
+      </div>
+    </section>
+
+    <section class="block container split">
+      <h2>Skills</h2>
+      <dl class="rows">
+        <div><dt>Languages</dt><dd>HTML, CSS, JavaScript, TypeScript</dd></div>
+        <div><dt>Frameworks and libraries</dt><dd>React, Tailwind CSS, Vite, Recharts</dd></div>
+        <div><dt>Tools</dt><dd>Git, GitHub, VS Code, Firebase</dd></div>
+        <div><dt>Learning</dt><dd>Mobile app development</dd></div>
+      </dl>
+    </section>
+
+    <section class="block container split">
+      <h2>Education</h2>
+      <dl class="rows">
+        <div>
+          <dt>2025 to present</dt>
+          <dd><strong>B.Sc. Software Engineering, Bowen University</strong><br />Currently in 200 level.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="closing container">
+      <h2>Want to work together?</h2>
+      <p>I'm open to internships, freelance projects and collaborations.</p>
+      <a href="contact.html" class="btn btn-primary">Contact me</a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Oluwaferanmi Peter. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a class="icon-link" href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg><span>GitHub</span></a></li>
+        <li><a class="icon-link" href="https://linkedin.com/in/feranmi-osungbure-7528b6446" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg><span>LinkedIn</span></a></li>
+        <li><a class="icon-link" href="https://instagram.com/oluwaferanmi_dev" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg><span>Instagram</span></a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
