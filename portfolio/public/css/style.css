@@ -309,16 +309,11 @@ h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
   flex: 1; display: grid; place-content: center; justify-items: center;
   text-align: center; gap: 18px; padding-block: 40px;
 }
-.wordmark { font-size: clamp(2.2rem, 8.4vw, 6rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
-.wordmark span { color: var(--accent); }
+.wordmark { font-size: clamp(2rem, 9.4vw, 6rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
 .landing-sub { color: var(--muted); font-size: clamp(1rem, 2vw, 1.2rem); }
 .landing .btn { margin-top: 20px; padding: 16px 30px; font-size: 1.05rem; }
 .landing-foot { display: flex; justify-content: center; padding-block: 24px 32px; }
 
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-.landing > * { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-.landing > :nth-child(2) { animation-delay: 0.1s; }
-.landing > :nth-child(3) { animation-delay: 0.2s; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
@@ -350,6 +345,5 @@ h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .landing > * { animation: none; }
   .btn { transition: none; }
 }

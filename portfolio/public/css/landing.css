@@ -1,0 +1,155 @@
+/* ============================================================
+   Landing page animation and effects (loaded on index.html only)
+   Timeline: letters drop and roll (0.2s to 1.1s), ".dev" lands
+   with an impact (1.6s to 2.9s), subtitle types in, then the
+   button and socials appear. After that the name reacts to the
+   cursor.
+   ============================================================ */
+
+.landing-page { --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+/* ---------- The wordmark ---------- */
+.wordmark { display: inline-block; cursor: default; user-select: none; -webkit-user-select: none; animation: thud 0.5s ease-out 2.4s both; }
+.word { display: inline-block; white-space: nowrap; }
+.word.dev { position: relative; color: var(--accent); }
+
+.ch {
+  display: inline-block;
+  will-change: transform;
+  /* Resting state. --p (0 to 1) is set by landing.js as the cursor gets near. */
+  transform: translateY(calc(var(--p, 0) * -0.1em)) rotate(calc(var(--p, 0) * var(--tilt, 0) * 1deg)) scale(calc(1 + var(--p, 0) * 0.16));
+  color: var(--text);
+  color: color-mix(in srgb, var(--accent) calc(var(--p, 0) * 100%), var(--text));
+  text-shadow: 0 0 calc(var(--p, 0) * 0.4em) color-mix(in srgb, var(--accent) calc(var(--p, 0) * 70%), transparent);
+  animation: drop var(--t, 1.2s) var(--d, 0s) both;
+  animation-fill-mode: backwards;
+}
+.dev .ch {
+  color: var(--accent);
+  color: color-mix(in srgb, var(--text) calc(var(--p, 0) * 85%), var(--accent));
+}
+
+/* Fall from above, roll while falling, land, then bounce twice */
+@keyframes drop {
+  0%   { transform: translate(var(--x), -80vh) rotate(var(--rot)); opacity: 0; animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6); }
+  6%   { opacity: 1; }
+  52%  { transform: translate(0, 0) rotate(var(--land)); animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1); }
+  68%  { transform: translate(0, -0.16em) rotate(calc(var(--land) * -0.5)); animation-timing-function: cubic-bezier(0.6, 0, 0.9, 0.5); }
+  82%  { transform: translate(0, 0) rotate(calc(var(--land) * 0.22)); animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1); }
+  91%  { transform: translate(0, -0.035em) rotate(calc(var(--land) * -0.08)); animation-timing-function: ease-in; }
+  100% { transform: translate(0, 0) rotate(0); opacity: 1; }
+}
+
+/* The whole name takes a small hit when ".dev" lands */
+@keyframes thud {
+  0%, 100% { transform: none; }
+  30% { transform: translateY(0.03em) scale(1.012, 0.985); }
+  65% { transform: translateY(-0.008em); }
+}
+
+/* Shock ring under ".dev" */
+.word.dev::after {
+  content: ""; position: absolute; left: 50%; bottom: -0.04em;
+  width: 120%; height: 0.3em; border-radius: 50%;
+  border: 2px solid var(--accent);
+  transform: translateX(-50%) scale(0.2, 0.2); opacity: 0; pointer-events: none;
+  animation: ring 1.1s ease-out 2.4s both;
+}
+@keyframes ring {
+  0%   { transform: translateX(-50%) scale(0.2, 0.2); opacity: 0; }
+  4%   { transform: translateX(-50%) scale(0.25, 0.25); opacity: 0.9; }
+  100% { transform: translateX(-50%) scale(1.7, 1.3); opacity: 0; }
+}
+
+/* ---------- Subtitle: wipe in with a caret ---------- */
+.landing-sub { position: relative; }
+.sub-text {
+  position: relative; display: inline-block; white-space: nowrap;
+  font-size: clamp(0.8rem, 3.6vw, 1.2rem);
+  animation: wipe 1.3s steps(42, end) 2.6s both;
+  animation-fill-mode: backwards;
+}
+.sub-text::after {
+  content: ""; position: absolute; top: 12%; bottom: 12%; left: 0; width: 2px;
+  background: var(--accent); opacity: 0; border-radius: 1px;
+  animation: caret-move 1.3s steps(42, end) 2.6s both, caret-blink 0.7s steps(1) 3.9s 4;
+}
+@keyframes wipe {
+  from { clip-path: inset(-0.3em 100% -0.3em 0); }
+  to   { clip-path: inset(-0.3em 0 -0.3em 0); }
+}
+@keyframes caret-move {
+  0%   { left: 0; opacity: 1; }
+  99%  { left: 100%; opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes caret-blink { 0%, 100% { opacity: 1; left: 100%; } 50% { opacity: 0; left: 100%; } }
+
+/* ---------- Button and footer arrive last ---------- */
+@keyframes arrive { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.landing .btn {
+  position: relative; overflow: hidden;
+  animation: arrive 0.8s var(--ease-out) 3.3s backwards;
+}
+.landing .btn::after {  /* light sweep on hover */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.38) 50%, transparent 65%);
+  transform: translateX(-120%);
+}
+.landing .btn:hover::after { transform: translateX(120%); transition: transform 0.7s ease; }
+.landing-foot { animation: arrive 0.8s var(--ease-out) 3.6s backwards; }
+.landing-top  { animation: arrive 0.8s var(--ease-out) 0.2s backwards; }
+
+/* ---------- Cursor spotlight (dots light up near the pointer) ---------- */
+.landing-spot {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+  transition: opacity 0.6s ease;
+  --mx: 50%; --my: 40%;
+  background:
+    radial-gradient(circle 260px at var(--mx) var(--my), var(--glow-a), transparent 70%);
+}
+.landing-spot::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(var(--accent) 1.3px, transparent 1.6px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(circle 170px at var(--mx) var(--my), #000, transparent);
+  mask-image: radial-gradient(circle 170px at var(--mx) var(--my), #000, transparent);
+}
+.landing-page.pointer-on .landing-spot { opacity: 1; }
+
+/* ---------- Floating code symbols ---------- */
+.glyphs { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.glyph {
+  position: absolute; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--s, 3rem); font-weight: 600; color: var(--accent); line-height: 1;
+  opacity: 0.16;
+  transform: translate(calc(var(--px, 0) * var(--depth, 10) * 1px), calc(var(--py, 0) * var(--depth, 10) * 1px));
+  transition: transform 0.7s ease-out;
+  animation: glyph-in 1.2s ease-out var(--delay, 2.6s) backwards;
+}
+.glyph i {
+  display: block; font-style: normal;
+  animation: float var(--dur, 8s) ease-in-out infinite alternate;
+}
+@keyframes glyph-in { from { opacity: 0; } to { opacity: 0.16; } }
+@keyframes float {
+  from { transform: translateY(-9px) rotate(-5deg); }
+  to   { transform: translateY(9px) rotate(5deg); }
+}
+
+/* ---------- Replay: toggling .stop restarts every animation ---------- */
+.landing-page.stop *, .landing-page.stop *::after { animation: none !important; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 760px) {
+  .glyph.g6, .glyph.g7, .glyph.g8 { display: none; }
+  .glyph { opacity: 0.12; }
+  @keyframes glyph-in { from { opacity: 0; } to { opacity: 0.12; } }
+}
+
+/* ---------- Reduced motion: show the finished page, no movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .landing-page *, .landing-page *::after { animation: none !important; }
+  .glyph { transition: none; }
+  .landing-spot { display: none; }
+}
