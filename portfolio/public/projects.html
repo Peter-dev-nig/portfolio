@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects | Oluwaferanmi</title>
+  <title>Projects | oluwaferanmi.dev</title>
   <meta name="description" content="Projects by Oluwaferanmi Osungbure, including ClientFlow, a CRM web app built with React and TypeScript." />
-  <meta property="og:title" content="Projects | Oluwaferanmi" />
-  <meta property="og:description" content="What I've built, what each project does and what I used." />
+  <meta property="og:title" content="Projects | oluwaferanmi.dev" />
+  <meta property="og:description" content="What I've built and what I used." />
   <meta property="og:image" content="https://oluwaferanmi-dev-portfolio.web.app/images/me.jpg" />
   <link rel="icon" href="images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Source+Serif+4:opsz,wght@8..60,400..600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script>
     try {
@@ -21,11 +21,10 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <nav class="nav container" aria-label="Main">
-      <a href="home.html" class="logo">Oluwaferanmi.Dev</a>
+      <a href="home.html" class="logo">oluwaferanmi<span>.dev</span></a>
       <ul class="nav-links" id="nav-links">
         <li><a href="home.html">Home</a></li>
         <li><a href="projects.html" aria-current="page">Projects</a></li>
@@ -33,71 +32,78 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <button id="theme-toggle" class="pill-btn" type="button">Dark</button>
-        <button id="menu-toggle" class="pill-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to dark mode"><svg class="icon" aria-hidden="true"><use href="#icon-moon"/></svg></button>
+        <button id="menu-toggle" class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="#icon-menu"/></svg></button>
       </div>
     </nav>
   </header>
 
-  <main id="main">
+  <main>
 
     <section class="page-head container">
       <h1>Projects</h1>
-      <p class="lead">What I've built, what each project does and what I used.</p>
+      <p>A selection of what I've built and the tools I used.</p>
     </section>
 
-    <article class="block container" id="clientflow">
-      <div class="project-head">
-        <div class="project-intro">
-          <h2>ClientFlow</h2>
-          <p>
-            A frontend CRM web app for managing customers, orders and campaigns. It has a
-            sign-in flow, a revenue dashboard with charts, an activity log and light and dark themes.
-          </p>
-          <div class="link-row">
-            <!-- Replace each # with the real link when you have it -->
-            <a class="text-link icon-link" href="#" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg><span>View live demo</span></a>
-            <a class="text-link icon-link" href="#" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg><span>View source on GitHub</span></a>
-          </div>
-        </div>
-        <dl class="facts">
-          <div><dt>Role</dt><dd>Design and frontend development</dd></div>
-          <div><dt>Stack</dt><dd>React, TypeScript, Vite, Tailwind CSS, Recharts</dd></div>
-          <div><dt>Screens</dt><dd>Customers, orders, campaigns, settings, activity log</dd></div>
-        </dl>
-      </div>
-
-      <div class="shots">
-        <figure class="phone">
-          <img src="images/clientflow.png" width="720" height="1395" loading="lazy"
+    <section class="section container">
+      <article class="project" id="clientflow">
+        <div class="project-media">
+          <img src="images/clientflow.png" width="720" height="1395"
                alt="ClientFlow landing page with the headline Manage Clients, Monitor Orders, Grow Faster" />
-          <figcaption>Landing page</figcaption>
-        </figure>
-        <figure class="phone">
-          <img src="images/project-2.png" width="720" height="1237" loading="lazy"
+          <img src="images/project-2.png" width="720" height="1237"
                alt="ClientFlow sign-in screen with email and password fields" />
-          <figcaption>Sign in</figcaption>
-        </figure>
-        <figure class="phone">
-          <img src="images/project-3.png" width="720" height="1383" loading="lazy"
-               alt="ClientFlow dashboard showing total revenue, customers, orders and a revenue chart" />
-          <figcaption>Dashboard</figcaption>
-        </figure>
-      </div>
-    </article>
+          <img src="images/project-3.png" width="720" height="1383"
+               alt="ClientFlow dashboard showing revenue, customers, orders and a revenue chart" />
+        </div>
+        <div class="project-body">
+          <div>
+            <h3>ClientFlow</h3>
+            <p>
+              A frontend CRM web app for managing customers, orders and campaigns. It has a
+              sign-in flow, a revenue dashboard with charts, an activity log and light and dark themes.
+            </p>
+            <div class="project-actions">
+              <!-- Replace each # with the real link when you have it -->
+              <a href="#" class="btn btn-primary" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg>Live demo</a>
+              <a href="#" class="btn btn-outline" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg>Source code</a>
+            </div>
+          </div>
+          <dl class="meta">
+            <div>
+              <dt>Role</dt>
+              <dd>Design and frontend development</dd>
+            </div>
+            <div>
+              <dt>Built with</dt>
+              <dd>
+                <ul class="tags"><li>React</li><li>TypeScript</li><li>Vite</li><li>Tailwind CSS</li><li>Recharts</li></ul>
+              </dd>
+            </div>
+            <div>
+              <dt>Screens</dt>
+              <dd>Customers, orders, campaigns, settings and activity log</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+    </section>
 
-    <section class="block container split">
-      <h2>More work</h2>
-      <div class="prose">
-        <p>More of my code is on GitHub, including smaller experiments and work in progress.</p>
-        <a class="text-link icon-link" href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg><span>Visit my GitHub profile</span></a>
+    <section class="section container">
+      <div class="card more-card">
+        <div>
+          <h3>More on GitHub</h3>
+          <p>Smaller experiments and work in progress live there.</p>
+        </div>
+        <a href="https://github.com/Peter-dev-nig" class="btn btn-outline" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg>View GitHub profile</a>
       </div>
     </section>
 
-    <section class="closing container">
-      <h2>Have a project in mind?</h2>
-      <p>I'm open to internships, freelance projects and collaborations.</p>
-      <a href="contact.html" class="btn btn-primary">Contact me</a>
+    <section class="section container">
+      <div class="cta">
+        <h2>Have a project in mind?</h2>
+        <p>I'm open to internships, freelance projects and collaborations.</p>
+        <a href="contact.html" class="btn btn-light">Contact me</a>
+      </div>
     </section>
 
   </main>
@@ -105,11 +111,12 @@
   <footer class="footer">
     <div class="container footer-inner">
       <p>&copy; <span id="year"></span> Oluwaferanmi Peter. All rights reserved.</p>
-      <ul class="footer-links">
-        <li><a class="icon-link" href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg><span>GitHub</span></a></li>
-        <li><a class="icon-link" href="https://linkedin.com/in/feranmi-osungbure-7528b6446" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg><span>LinkedIn</span></a></li>
-        <li><a class="icon-link" href="https://instagram.com/oluwaferanmi_dev" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg><span>Instagram</span></a></li>
-      </ul>
+      <div class="social">
+        <a href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg></a>
+        <a href="https://linkedin.com/in/feranmi-osungbure-7528b6446" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg></a>
+        <a href="https://instagram.com/oluwaferanmi_dev" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg></a>
+        <a href="mailto:oluwaferanmipeterdev@gmail.com" aria-label="Email" title="Email"><svg class="icon" aria-hidden="true"><use href="#icon-mail"/></svg></a>
+      </div>
     </div>
   </footer>
 

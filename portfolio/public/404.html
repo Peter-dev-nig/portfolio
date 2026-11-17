@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page not found | Oluwaferanmi</title>
+  <title>Page not found | oluwaferanmi.dev</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="/images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Source+Serif+4:opsz,wght@8..60,400..600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
   <script>
     try {
@@ -18,11 +18,10 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <nav class="nav container" aria-label="Main">
-      <a href="/home.html" class="logo">Oluwaferanmi.Dev</a>
+      <a href="/home.html" class="logo">oluwaferanmi<span>.dev</span></a>
       <ul class="nav-links" id="nav-links">
         <li><a href="/home.html">Home</a></li>
         <li><a href="/projects.html">Projects</a></li>
@@ -30,17 +29,19 @@
         <li><a href="/contact.html">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <button id="theme-toggle" class="pill-btn" type="button">Dark</button>
-        <button id="menu-toggle" class="pill-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to dark mode"><svg class="icon" aria-hidden="true"><use href="#icon-moon"/></svg></button>
+        <button id="menu-toggle" class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="#icon-menu"/></svg></button>
       </div>
     </nav>
   </header>
 
-  <main id="main">
+  <main>
     <section class="page-head container">
       <h1>Page not found</h1>
-      <p class="lead">That page doesn't exist or has moved. Check the address, or go back to the home page.</p>
-      <a href="/home.html" class="btn btn-primary">Go to home</a>
+      <p>That page doesn't exist or has moved. Check the address, or go back to the home page.</p>
+      <div class="hero-actions">
+        <a href="/home.html" class="btn btn-primary">Go to home</a>
+      </div>
     </section>
   </main>
 
