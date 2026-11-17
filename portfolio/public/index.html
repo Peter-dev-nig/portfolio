@@ -169,7 +169,10 @@
       <p class="section-sub">Have a project, an internship or just want to say hi? Send me a message.</p>
 
       <div class="contact-wrap">
-        <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <form id="contact-form" class="form" action="https://formspree.io/f/mljbjqqv" method="POST">
+          <input type="hidden" name="_subject" value="New message from my portfolio" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
           <label>Name
             <input type="text" name="name" required />
           </label>
@@ -180,13 +183,14 @@
             <textarea name="message" rows="5" required></textarea>
           </label>
           <button type="submit" class="btn btn-primary">Send message</button>
+          <p id="form-status" role="status" aria-live="polite"></p>
         </form>
 
         <ul class="contact-links">
-          <li><a href="mailto:you@example.com">you@example.com</a></li>
-          <li><a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://instagram.com/your-username" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="mailto:oluwaferanmipeterdev@gmail.com">oluwaferanmipeterdev@gmail.com</a></li>
+          <li><a href="https://github.com/Peter-dev-nig" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/feranmi-osungbure-7528b6446?" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://instagram.com/oluwaferanmi_dev" target="_blank" rel="noopener">Instagram</a></li>
         </ul>
       </div>
     </section>
@@ -194,7 +198,7 @@
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Peter. Built with HTML, CSS &amp; JavaScript.</p>
+    <p>© <span id="year"></span> Oluwaferanmi Peter. All rights reserved.</p>
   </footer>
 
   <script src="js/main.js"></script>

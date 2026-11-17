@@ -189,3 +189,7 @@ ul { list-style: none; }
   * { transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+#form-status { font-weight: 500; min-height: 1.5em; }
+#form-status.success { color: #16a34a; }
+#form-status.error { color: #dc2626; }

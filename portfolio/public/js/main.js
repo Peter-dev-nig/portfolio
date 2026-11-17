@@ -60,3 +60,34 @@ if ("IntersectionObserver" in window) {
 } else {
   revealEls.forEach((el) => el.classList.add("visible"));
 }
+
+// ---------- Contact form (no redirect) ----------
+const form = document.getElementById("contact-form");
+const statusEl = document.getElementById("form-status");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = form.querySelector("button[type=submit]");
+  btn.disabled = true;
+  btn.textContent = "Sending...";
+  statusEl.className = "";
+  statusEl.textContent = "";
+
+  try {
+    const res = await fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) throw new Error("Request failed");
+    form.reset();
+    statusEl.textContent = "Thanks! I'll reply soon.";
+    statusEl.className = "success";
+  } catch (err) {
+    statusEl.textContent = "Something went wrong. Please try again or email me directly.";
+    statusEl.className = "error";
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Send message";
+  }
+});
