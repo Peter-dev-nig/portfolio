@@ -115,6 +115,21 @@
 .landing-foot { animation: arrive 0.8s var(--ease-out) 3.6s backwards; }
 .landing-top  { animation: arrive 0.8s var(--ease-out) 0.2s backwards; }
 
+/* ---------- Slow drifting glow behind the name ---------- */
+.landing-bg::before {
+  content: ""; position: absolute; width: 55vmax; height: 55vmax; left: 8%; top: -18%;
+  background: radial-gradient(closest-side, var(--glow-a), transparent 70%); filter: blur(30px);
+  animation: drift 20s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(28vw, 14vh) scale(1.12); }
+  to   { transform: translate(12vw, 30vh) scale(0.95); }
+}
+
+/* ---------- Magnetic button ---------- */
+.landing .btn { transform: translate(var(--tx, 0px), var(--ty, 0px)); transition: transform 0.25s ease-out, box-shadow 0.2s ease; }
+
 /* ---------- Cursor spotlight (dots light up near the pointer) ---------- */
 .landing-spot {
   position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
@@ -167,4 +182,5 @@
   .landing-page *, .landing-page *::after { animation: none !important; }
   .glyph { transition: none; }
   .landing-spot { display: none; }
+  .landing-page .landing-bg::before { animation: none; }
 }

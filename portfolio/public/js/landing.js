@@ -127,5 +127,25 @@
     waitForIntro();
   });
 
+  /* Now and then, a light sweeps across the name while nobody is hovering */
+  setInterval(function () {
+    if (ready && !pointerActive && !sweeping) { sweeping = true; sweepStart = performance.now(); start(); }
+  }, 9000);
+
+  /* The main button leans toward the cursor */
+  var cta = document.querySelector(".landing .btn");
+  if (cta && window.matchMedia("(hover: hover)").matches) {
+    window.addEventListener("pointermove", function (e) {
+      var r = cta.getBoundingClientRect();
+      var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+      var d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 150) {
+        var k = (1 - d / 150) * 0.35;
+        cta.style.setProperty("--tx", (dx * k).toFixed(1) + "px");
+        cta.style.setProperty("--ty", (dy * k).toFixed(1) + "px");
+      } else { cta.style.removeProperty("--tx"); cta.style.removeProperty("--ty"); }
+    }, { passive: true });
+  }
+
   waitForIntro();
 })();

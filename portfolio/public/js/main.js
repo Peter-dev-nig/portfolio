@@ -18,6 +18,9 @@ document.body.insertAdjacentHTML(
   <symbol id="icon-desktop" viewBox="0 0 24 24"><g ${STROKE}><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></g></symbol>
   <symbol id="icon-window" viewBox="0 0 24 24"><g ${STROKE}><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01"/></g></symbol>
   <symbol id="icon-layout" viewBox="0 0 24 24"><g ${STROKE}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></g></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24"><g ${STROKE}><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></g></symbol>
+  <symbol id="icon-copy" viewBox="0 0 24 24"><g ${STROKE}><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></g></symbol>
+  <symbol id="icon-arrow" viewBox="0 0 24 24"><g ${STROKE}><path d="M5 12h14M13 6l6 6-6 6"/></g></symbol>
   <symbol id="icon-tool" viewBox="0 0 24 24"><g ${STROKE}><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></g></symbol>
 </svg>`
 );
@@ -105,3 +108,226 @@ if (form && statusEl) {
     }
   });
 }
+
+
+// ---------- Card spotlight: the glow follows the cursor ----------
+if (window.matchMedia("(hover: hover)").matches) {
+  document.addEventListener("pointermove", (e) => {
+    const card = e.target.closest && e.target.closest(".card, .project");
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", e.clientX - r.left + "px");
+    card.style.setProperty("--my", e.clientY - r.top + "px");
+  }, { passive: true });
+}
+
+// ---------- Command menu (Ctrl+K or Cmd+K, "/", or the search button) ----------
+(function () {
+  const nav = document.getElementById("nav-links");
+  const actionsBar = document.querySelector(".nav-actions");
+  if (!nav || !actionsBar) return;
+
+  const mail = document.querySelector('a[href^="mailto:"]');
+  const address = mail ? mail.getAttribute("href").replace("mailto:", "") : "";
+
+  // The extra options that open up under "Go to Contact"
+  function contactOptions() {
+    const kids = [];
+    if (mail) {
+      kids.push({ label: "Send an email", hint: address, icon: "mail", run: () => { location.href = mail.href; } });
+      kids.push({ label: "Copy email address", hint: "Copy", icon: "copy", keepOpen: true, run: (it, li) => {
+        const done = () => { li.querySelector(".cmd-hint").textContent = "Copied"; setTimeout(close, 700); };
+        try { navigator.clipboard.writeText(address).then(done, done); } catch (e) { done(); }
+      } });
+    }
+    const seen = new Set();
+    document.querySelectorAll(".social a[aria-label]").forEach((a) => {
+      const name = a.getAttribute("aria-label");
+      if (name === "Email" || seen.has(name)) return;
+      seen.add(name);
+      kids.push({ label: "Open " + name, hint: "New tab", icon: name.toLowerCase(), run: () => window.open(a.href, "_blank", "noopener") });
+    });
+    return kids;
+  }
+
+  function buildItems() {
+    const out = [];
+    nav.querySelectorAll("a").forEach((a, n) => {
+      const it = { id: "page-" + n, label: "Go to " + a.textContent.trim(), hint: "Page", icon: "arrow", run: () => { location.href = a.href; } };
+      if (/contact/i.test(a.getAttribute("href") || "")) it.children = contactOptions();
+      out.push(it);
+    });
+    const dark = (root.getAttribute("data-theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")) === "dark";
+    out.push({ id: "theme", label: dark ? "Switch to light mode" : "Switch to dark mode", hint: "Theme", icon: dark ? "sun" : "moon", run: () => themeBtn && themeBtn.click() });
+    return out;
+  }
+
+  const overlay = document.createElement("div");
+  overlay.className = "cmd";
+  overlay.innerHTML =
+    '<div class="cmd-panel" role="dialog" aria-modal="true" aria-label="Command menu">' +
+    '<input class="cmd-input" type="text" placeholder="Type a command or search…" aria-label="Search commands" aria-controls="cmd-list" autocomplete="off" spellcheck="false" />' +
+    '<ul class="cmd-list" id="cmd-list" role="listbox"></ul>' +
+    '<div class="cmd-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> to move</span><span><kbd>→</kbd> for options</span><span><kbd>Enter</kbd> to select</span><span><kbd>Esc</kbd> to close</span></div>' +
+    "</div>";
+  document.body.appendChild(overlay);
+  const input = overlay.querySelector(".cmd-input");
+  const list = overlay.querySelector(".cmd-list");
+
+  let items = [], rows = [], active = 0, expanded = null, lastFocus = null, collapseTimer = 0;
+
+  const matches = (it, q) => it.label.toLowerCase().includes(q) || it.hint.toLowerCase().includes(q);
+
+  function computeRows() {
+    const q = input.value.trim().toLowerCase();
+    rows = [];
+    items.forEach((it) => {
+      const kids = it.children || [];
+      if (q) {
+        if (matches(it, q)) rows.push({ it: it, depth: 0 });
+        kids.forEach((k) => { if (matches(k, q)) rows.push({ it: k, depth: 0 }); });
+      } else {
+        rows.push({ it: it, depth: 0 });
+        if (kids.length && expanded === it.id) kids.forEach((k) => rows.push({ it: k, depth: 1, parent: it }));
+      }
+    });
+  }
+
+  function render(keep) {
+    computeRows();
+    if (keep) { const at = rows.findIndex((r) => r.it === keep); if (at >= 0) active = at; }
+    active = Math.min(active, Math.max(rows.length - 1, 0));
+    list.innerHTML = "";
+    if (!rows.length) { list.innerHTML = '<li class="cmd-empty">No results. Try "projects" or "github".</li>'; return; }
+    const searching = !!input.value.trim();
+    rows.forEach((r, i) => {
+      const li = document.createElement("li");
+      li.className = "cmd-item" + (r.depth ? " sub" : ""); li.id = "cmd-" + i; li.setAttribute("role", "option");
+      li.setAttribute("aria-selected", String(i === active));
+      li.innerHTML = iconMarkup(r.it.icon) + "<span></span><span class=\"cmd-hint\"></span>";
+      li.children[1].textContent = r.it.label;
+      li.querySelector(".cmd-hint").textContent = r.it.hint;
+      if (r.it.children && !searching) {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "cmd-chev"; b.tabIndex = -1;
+        b.setAttribute("aria-label", "Show contact options"); b.setAttribute("aria-expanded", String(expanded === r.it.id));
+        b.innerHTML = iconMarkup("arrow");
+        b.addEventListener("click", (e) => {
+          e.stopPropagation();
+          expanded = expanded === r.it.id ? null : r.it.id;
+          render(r.it);
+        });
+        li.appendChild(b);
+      }
+      li.addEventListener("click", () => choose(i));
+      li.addEventListener("pointermove", () => {
+        if (active !== i) { active = i; mark(); }
+        if (searching) return;
+        // Hovering "Go to Contact" opens its options; hovering a different page closes them
+        const target = r.depth ? r.parent.id : (r.it.children ? r.it.id : null);
+        clearTimeout(collapseTimer);
+        if (target === expanded) return;
+        if (target) { expanded = target; render(r.it); }
+        else if (expanded) collapseTimer = setTimeout(() => { expanded = null; render(r.it); }, 180);
+      });
+      list.appendChild(li);
+    });
+    input.setAttribute("aria-activedescendant", "cmd-" + active);
+  }
+
+  function mark() {
+    [].forEach.call(list.children, (li, i) => li.setAttribute("aria-selected", String(i === active)));
+    input.setAttribute("aria-activedescendant", "cmd-" + active);
+    const el = list.children[active]; if (el && el.scrollIntoView) el.scrollIntoView({ block: "nearest" });
+  }
+  function choose(i) {
+    const r = rows[i]; if (!r) return;
+    if (!r.it.keepOpen) close();
+    r.it.run(r.it, list.children[i]);
+  }
+  function open() {
+    items = buildItems(); input.value = ""; active = 0; expanded = null; render();
+    lastFocus = document.activeElement;
+    overlay.classList.add("open");
+    input.focus();
+  }
+  function close() {
+    clearTimeout(collapseTimer);
+    overlay.classList.remove("open");
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  const isOpen = () => overlay.classList.contains("open");
+
+  input.addEventListener("input", () => { active = 0; render(); });
+  overlay.addEventListener("pointerdown", (e) => { if (e.target === overlay) close(); });
+  overlay.addEventListener("keydown", (e) => {
+    const r = rows[active];
+    if (e.key === "Escape") { e.preventDefault(); close(); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); if (rows.length) { active = (active + 1) % rows.length; mark(); } }
+    else if (e.key === "ArrowUp") { e.preventDefault(); if (rows.length) { active = (active - 1 + rows.length) % rows.length; mark(); } }
+    else if (e.key === "ArrowRight" && r && r.it.children && !input.value.trim()) {
+      e.preventDefault();
+      if (expanded !== r.it.id) { expanded = r.it.id; render(r.it); }
+      else if (rows[active + 1]) { active += 1; mark(); }
+    }
+    else if (e.key === "ArrowLeft" && r && !input.value.trim() && expanded) {
+      if (r.depth) { e.preventDefault(); const parent = r.parent; expanded = null; render(parent); }
+      else if (r.it.id === expanded) { e.preventDefault(); expanded = null; render(r.it); }
+    }
+    else if (e.key === "Enter") { e.preventDefault(); choose(active); }
+    else if (e.key === "Tab") { e.preventDefault(); }
+  });
+  document.addEventListener("keydown", (e) => {
+    const k = e.key.toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && k === "k") { e.preventDefault(); isOpen() ? close() : open(); }
+    else if (k === "/" && !isOpen() && !/^(input|textarea|select)$/i.test((e.target.tagName || ""))) { e.preventDefault(); open(); }
+  });
+
+  const btn = document.createElement("button");
+  btn.type = "button"; btn.id = "cmd-btn"; btn.className = "icon-btn";
+  btn.setAttribute("aria-label", "Open command menu"); btn.title = "Command menu (Ctrl K)";
+  btn.innerHTML = iconMarkup("search");
+  btn.addEventListener("click", open);
+  actionsBar.insertBefore(btn, actionsBar.firstChild);
+})();
+
+// ---------- Scroll progress bar ----------
+(function () {
+  if (document.querySelector(".landing-page")) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const bar = document.createElement("div");
+  bar.className = "progress"; bar.setAttribute("aria-hidden", "true");
+  document.body.appendChild(bar);
+  let ticking = false;
+  function update() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.setProperty("--p", max > 0 ? Math.min(window.scrollY / max, 1).toFixed(4) : 0);
+    ticking = false;
+  }
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+})();
+
+// ---------- Scroll reveal (only for things below the fold) ----------
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+  const targets = document.querySelectorAll("main .section-head, main .card, main .project, main .cta");
+  if (!targets.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      el.classList.add("in");
+      io.unobserve(el);
+      setTimeout(() => { el.classList.remove("reveal", "in"); el.style.removeProperty("--rd"); }, 1100);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+  targets.forEach((el) => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) return;
+    const idx = Array.prototype.indexOf.call(el.parentElement.children, el);
+    el.style.setProperty("--rd", Math.min(Math.max(idx, 0), 5) * 0.08 + "s");
+    el.classList.add("reveal");
+    io.observe(el);
+  });
+})();
